@@ -11,16 +11,40 @@
 var canvas;
 var canvasContext;
 
+// ball variables
+var ballX = 75;
+var ballY = 75;
+
 window.onload = function() {
-	console.log("Hello World!");
+	// save the canvas dimensions, and its 2d context for drawing it.
+	canvas = document.getElementById('gameCanvas');
+	canvasContext = canvas.getContext('2d');
 
+	// set frames per second
+	var FramesPerSecond = 30;
 
-// save the canvas dimensions, and its 2d context for drawing it.
-canvas = document.getElementById('gameCanvas');
-canvasContext = canvas.getContext('2d');
+	// call the draw and move functions 30 times per second (1000ms)
+	setInterval(function() {
+		drawEverything();
+		moveEverything();
+	}, 1000 / FramesPerSecond);
+}
 
-canvasContext.fillStyle = 'black';
-canvasContext.fillRect (0, 0, canvas.width, canvas.height);
+function moveEverything() {
+	// update the balls position 5 pixels 30 times per second
+	ballX += 5;
+}
+
+function drawEverything() {
+	// clear the game view by filling it with black
+	canvasContext.fillStyle = 'black';
+	canvasContext.fillRect (0, 0, canvas.width, canvas.height);
+
+	// draw a white circle
+	canvasContext.fillStyle = 'white';
+	canvasContext.beginPath();
+	canvasContext.arc(ballX, ballY, 10, 0, Math.PI * 2, true);
+	canvasContext.fill();
 }
 </script>
 	
