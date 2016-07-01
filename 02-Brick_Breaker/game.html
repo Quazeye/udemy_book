@@ -70,8 +70,13 @@ function calculateMousePos (evt) {
 	};
 }
 
+function resetBall () {
+	ballX = 75;
+	ballY = 75;
+}
+
 function moveEverything() {
-	// update the balls position to the right by a small amount
+	// update the balls position to the right and down by a small amount
 	ballX += ballSpeedX;
 	ballY += ballSpeedY;
 
@@ -84,14 +89,20 @@ function moveEverything() {
  	if (ballX < 0) {
  		ballSpeedX *= -1;
  	}
-	// if the ball moves past the bottom edge of the canvas make it reverse
+	// if the ball hits paddle then reverse direction otherwise reset the ball
  	if (ballY > canvas.height) {
- 		ballSpeedY *= -1;
+ 		if (ballX >= paddle1X  && ballX <= paddle1X + Paddle_Width) {
+ 			ballSpeedY *= -1;
+ 		} else {
+ 			resetBall();
+ 		}
  	}
-// if the ball moves past the top edge of the canvas make it reverse
+	// if the ball moves past the top edge of the canvas make it reverse
  	if (ballY < 0) {
  		ballSpeedY *= -1;
  	}
+
+
 }
 
 function drawEverything() {
